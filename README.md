@@ -4,8 +4,8 @@ Proposal to add support for optional chaining on the left of assignment operator
 
 ## Status
 
-Champion: Nicolò Ribaudo
-Stage: 0
+- Champion: Nicolò Ribaudo
+- Stage: 0
 
 ## Motivation
 
