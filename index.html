@@ -1423,7 +1423,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let sdoMap = JSON.parse(`{}`);
-let biblio = JSON.parse(`{"refsByClause":{"sec-demo-clause":["_ref_0"]},"entries":[{"type":"clause","id":"sec-demo-clause","titleHTML":"This is an emu-clause","number":"1"},{"type":"op","aoid":"IsAccepted","refId":"sec-is-accepted"},{"type":"clause","id":"sec-is-accepted","title":"IsAccepted ( proposal )","titleHTML":"IsAccepted ( <var>proposal</var> )","number":"2","referencingIds":["_ref_0"]},{"type":"clause","id":"sec-copyright-and-software-license","title":"Copyright & Software License","titleHTML":"Copyright &amp; Software License","number":"A"}]}`);
+let biblio = JSON.parse(`{"refsByClause":{"sec-static-semantics-assignmenttargettype":["_ref_0","_ref_1"],"sec-assignment-operators-static-semantics-early-errors":["_ref_2","_ref_3"]},"entries":[{"type":"op","aoid":"AssignmentTargetType","refId":"sec-static-semantics-assignmenttargettype"},{"type":"clause","id":"sec-static-semantics-assignmenttargettype","titleHTML":"Static Semantics: AssignmentTargetType","number":"1.1","referencingIds":["_ref_0","_ref_1","_ref_2","_ref_3"]},{"type":"clause","id":"sec-assignment-operators-static-semantics-early-errors","titleHTML":"Static Semantics: Early Errors","number":"1.2"},{"type":"step","id":"step-assignmentexpression-evaluation-simple-putvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-compound-getvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-compound-putvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-and-getvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-and-putvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-or-getvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-or-putvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-nullish-getvalue"},{"type":"step","id":"step-assignmentexpression-evaluation-lgcl-nullish-putvalue"},{"type":"clause","id":"sec-assignment-operators-runtime-semantics-evaluation","titleHTML":"Runtime Semantics: Evaluation","number":"1.3"},{"type":"clause","id":"sec-assignment-operators","titleHTML":"Assignment Operators","number":"1"},{"type":"clause","id":"sec-copyright-and-software-license","title":"Copyright & Software License","titleHTML":"Copyright &amp; Software License","number":"A"}]}`);
 ;let usesMultipage = false</script><style>body {
   display: flex;
   word-wrap: break-word;
@@ -2696,18 +2696,602 @@ li.menu-search-result-term:before {
 </ul></div><div id="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; stroke:currentColor" viewBox="0 0 120 120">
       <title>Menu</title>
       <path stroke-width="10" stroke-linecap="round" d="M30,60 h60  M30,30 m0,5 h60  M30,90 m0,-5 h60"></path>
-    </svg></div><div id="menu-spacer" class="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-demo-clause" title="This is an emu-clause"><span class="secnum">1</span> This is an emu-clause</a></li><li><span class="item-toggle-none"></span><a href="#sec-is-accepted" title="IsAccepted ( proposal )"><span class="secnum">2</span> IsAccepted ( <var>proposal</var> )</a></li><li><span class="item-toggle-none"></span><a href="#sec-copyright-and-software-license" title="Copyright &amp; Software License"><span class="secnum">A</span> Copyright &amp; Software License</a></li></ol></div></div><div id="spec-container"><h1 class="version">Stage 0 Draft / June 30, 2023</h1><h1 class="title">Optional Chaining Assignment</h1>
+    </svg></div><div id="menu-spacer" class="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-assignment-operators" title="Assignment Operators"><span class="secnum">1</span> Assignment Operators</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-static-semantics-assignmenttargettype" title="Static Semantics: AssignmentTargetType"><span class="secnum">1.1</span> SS: AssignmentTargetType</a></li><li><span class="item-toggle-none"></span><a href="#sec-assignment-operators-static-semantics-early-errors" title="Static Semantics: Early Errors"><span class="secnum">1.2</span> SS: Early Errors</a></li><li><span class="item-toggle-none"></span><a href="#sec-assignment-operators-runtime-semantics-evaluation" title="Runtime Semantics: Evaluation"><span class="secnum">1.3</span> RS: Evaluation</a></li></ol></li><li><span class="item-toggle-none"></span><a href="#sec-copyright-and-software-license" title="Copyright &amp; Software License"><span class="secnum">A</span> Copyright &amp; Software License</a></li></ol></div></div><div id="spec-container"><h1 class="version">Stage 0 Draft / June 30, 2023</h1><h1 class="title">Optional Chaining Assignment</h1>
 
-<emu-clause id="sec-demo-clause">
-  <h1><span class="secnum">1</span> This is an emu-clause</h1>
-  <p>This is an algorithm:</p>
-  <emu-alg><ol><li>Let <var>proposal</var> be <emu-val>undefined</emu-val>.</li><li>If <emu-xref aoid="IsAccepted" id="_ref_0"><a href="#sec-is-accepted">IsAccepted</a></emu-xref>(<var>proposal</var>) is <emu-val>true</emu-val>, then<ol><li>Let <var>stage</var> be <emu-val>0</emu-val><sub>ℤ</sub>.</li></ol></li><li>Else,<ol><li>Let <var>stage</var> be <emu-val>-1</emu-val><sub>ℤ</sub>.</li></ol></li><li>Return ?&nbsp;<emu-xref aoid="ToString"><a href="https://tc39.es/ecma262/#sec-tostring">ToString</a></emu-xref>(<var>stage</var>).</li></ol></emu-alg>
+<emu-clause id="sec-assignment-operators">
+  <h1><span class="secnum">1</span> Assignment Operators</h1>
+
+  <emu-clause id="sec-static-semantics-assignmenttargettype" type="sdo" aoid="AssignmentTargetType">
+  <h1><span class="secnum">1.1</span> Static Semantics: AssignmentTargetType</h1>
+  <p>The <emu-xref href="#sec-algorithm-conventions-syntax-directed-operations"><a href="https://tc39.es/ecma262/#sec-algorithm-conventions-syntax-directed-operations">syntax-directed operation</a></emu-xref> AssignmentTargetType takes no arguments and returns <emu-const>simple</emu-const>, <emu-const>optional</emu-const>, or <emu-const>invalid</emu-const>. It is defined piecewise over the following productions:</p>
+  <emu-grammar><emu-production name="IdentifierReference" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bras6mo_"><emu-nt><a href="https://tc39.es/ecma262/#prod-Identifier">Identifier</a></emu-nt></emu-rhs>
+</emu-production>
+</emu-grammar>
+  <emu-alg><ol><li>If this <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt> is contained in <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref> and <emu-xref aoid="StringValue"><a href="https://tc39.es/ecma262/#sec-static-semantics-stringvalue">StringValue</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-Identifier">Identifier</a></emu-nt> is either <emu-val>"eval"</emu-val> or <emu-val>"arguments"</emu-val>, return <emu-const>invalid</emu-const>.</li><li>Return <emu-const>simple</emu-const>.</li></ol></emu-alg>
+  <emu-grammar><emu-production name="IdentifierReference">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierReference">IdentifierReference</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="0d8zyjn8">
+        <emu-t>yield</emu-t>
+    </emu-rhs>
+    <emu-rhs a="hx1dvlrw">
+        <emu-t>await</emu-t>
+    </emu-rhs>
+</emu-production>
+<emu-production name="CallExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="2u2urbmg">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-t>[</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
+        <emu-t>]</emu-t>
+    </emu-rhs>
+    <emu-rhs a="u6lsbvgu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="cysjk9wh">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-PrivateIdentifier">PrivateIdentifier</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="MemberExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="a74xd7de">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-t>[</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
+        <emu-t>]</emu-t>
+    </emu-rhs>
+    <emu-rhs a="frbj984t">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="x4tzletw">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-SuperProperty">SuperProperty</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="0uk9afbi">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-PrivateIdentifier">PrivateIdentifier</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+  <emu-alg><ol><li>Return <emu-const>simple</emu-const>.</li></ol></emu-alg>
+  <emu-grammar><ins><emu-production name="OptionalExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalExpression">OptionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="tne-ixmh">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="vah6zjkb">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="m-2pf2bd">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalExpression">OptionalExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+    </emu-rhs>
+</emu-production></ins>
+</emu-grammar>
+  <emu-alg><ol><li><ins>Return <emu-xref aoid="AssignmentTargetType" id="_ref_0"><a href="#sec-static-semantics-assignmenttargettype">AssignmentTargetType</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>.</ins></li></ol></emu-alg>
+  <emu-grammar><ins><emu-production name="OptionalChain">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="kktyttw7">
+        <emu-t>?.</emu-t>
+        <emu-t>[</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
+        <emu-t>]</emu-t>
+    </emu-rhs>
+    <emu-rhs a="w-4ch2am">
+        <emu-t>?.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="0xlnjlpz">
+        <emu-t>?.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-PrivateIdentifier">PrivateIdentifier</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="jgl-kve-">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-t>[</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
+        <emu-t>]</emu-t>
+    </emu-rhs>
+    <emu-rhs a="lf2imwfr">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="dnp-fbqk">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-PrivateIdentifier">PrivateIdentifier</a></emu-nt>
+    </emu-rhs>
+</emu-production></ins>
+</emu-grammar>
+  <emu-alg><ol><li><ins>Return <emu-const>optional</emu-const>.</ins></li></ol></emu-alg>
+  <emu-grammar><emu-production name="PrimaryExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-PrimaryExpression">PrimaryExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="yrb110hm">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CoverParenthesizedExpressionAndArrowParameterList">CoverParenthesizedExpressionAndArrowParameterList</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+  <emu-alg><ol><li>Let <var>expr</var> be the <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt><a href="https://tc39.es/ecma262/#prod-CoverParenthesizedExpressionAndArrowParameterList">CoverParenthesizedExpressionAndArrowParameterList</a></emu-nt>.</li><li>Return <emu-xref aoid="AssignmentTargetType" id="_ref_1"><a href="#sec-static-semantics-assignmenttargettype">AssignmentTargetType</a></emu-xref> of <var>expr</var>.</li></ol></emu-alg>
+  <emu-grammar><emu-production name="PrimaryExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-PrimaryExpression">PrimaryExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="jo4mwtvh">
+        <emu-t>this</emu-t>
+    </emu-rhs>
+    <emu-rhs a="kul-a19e">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Literal">Literal</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="g_mjk5cm">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="zreje_zz">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="jc7szv1s">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-FunctionExpression">FunctionExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="2m5tsvzv">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ClassExpression">ClassExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="q7f39ayg">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-GeneratorExpression">GeneratorExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="rvibtigb">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AsyncFunctionExpression">AsyncFunctionExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="naptrn97">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AsyncGeneratorExpression">AsyncGeneratorExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="mbzy6lvr">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RegularExpressionLiteral">RegularExpressionLiteral</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="2zis6bbu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="CallExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="7jj-96li">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="ljkqw-iw">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-SuperCall">SuperCall</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="kyx2iyhy">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ImportCall">ImportCall</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="qugahahu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Arguments">Arguments</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="rc744wey">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<ins><emu-production name="OptionalChain">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="ynxeowdb">
+        <emu-t>?.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Arguments">Arguments</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="tfcmykyj">
+        <emu-t>?.</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="eogoekck">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Arguments">Arguments</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="ocv4xe0-">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
+    </emu-rhs>
+</emu-production></ins>
+<emu-production name="NewExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-NewExpression">NewExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="51p618ta">
+        <emu-t>new</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-NewExpression">NewExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="MemberExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="fj52gjle">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="cfq-hbbx">
+        <emu-t>new</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Arguments">Arguments</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="NewTarget">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-NewTarget">NewTarget</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="0t4hpsv9">
+        <emu-t>new</emu-t>
+        <emu-t>.</emu-t>
+        <emu-t>target</emu-t>
+    </emu-rhs>
+</emu-production>
+<emu-production name="ImportMeta">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-ImportMeta">ImportMeta</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="8myn6frq">
+        <emu-t>import</emu-t>
+        <emu-t>.</emu-t>
+        <emu-t>meta</emu-t>
+    </emu-rhs>
+</emu-production>
+<del><emu-production name="LeftHandSideExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="jbet6xpw">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-OptionalExpression">OptionalExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production></del>
+<emu-production name="UpdateExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-UpdateExpression">UpdateExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="i_jjg0ex">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>++</emu-t>
+    </emu-rhs>
+    <emu-rhs a="jr0tcoqg">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>--</emu-t>
+    </emu-rhs>
+    <emu-rhs a="vwgxygda">
+        <emu-t>++</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="onrvwudi">
+        <emu-t>--</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="UnaryExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="v9wiw5nl">
+        <emu-t>delete</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="5dgdjy7z">
+        <emu-t>void</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="qxosuesc">
+        <emu-t>typeof</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="o0kdmush">
+        <emu-t>+</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="odzkxnu5">
+        <emu-t>-</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="b9nqec7b">
+        <emu-t>~</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="ulcvcjyx">
+        <emu-t>!</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UnaryExpression">UnaryExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="shlomml6">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AwaitExpression">AwaitExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="ExponentiationExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-ExponentiationExpression">ExponentiationExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="0zbfzgb0">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-UpdateExpression">UpdateExpression</a></emu-nt>
+        <emu-t>**</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ExponentiationExpression">ExponentiationExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="MultiplicativeExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-MultiplicativeExpression">MultiplicativeExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="-5_iophl">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MultiplicativeExpression">MultiplicativeExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MultiplicativeOperator">MultiplicativeOperator</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ExponentiationExpression">ExponentiationExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="AdditiveExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dkl7f70y">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt>
+        <emu-t>+</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MultiplicativeExpression">MultiplicativeExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="7gvefllu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt>
+        <emu-t>-</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-MultiplicativeExpression">MultiplicativeExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="ShiftExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="tg9tkm4d">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+        <emu-t>&lt;&lt;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="vimn88nj">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+        <emu-t>&gt;&gt;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="n_furjdr">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+        <emu-t>&gt;&gt;&gt;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AdditiveExpression">AdditiveExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="RelationalExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="0hbjkrqw">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>&lt;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="gziyg7ut">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>&gt;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="kcktdtrm">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>&lt;=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="3cupp_tq">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>&gt;=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="1ec9rmdp">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>instanceof</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="9mtjpkmx">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+        <emu-t>in</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="bfkxjj0f">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-PrivateIdentifier">PrivateIdentifier</a></emu-nt>
+        <emu-t>in</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShiftExpression">ShiftExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="EqualityExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dxo0lfgu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt>
+        <emu-t>==</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="cn2twrby">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt>
+        <emu-t>!=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="4hu79ipe">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt>
+        <emu-t>===</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="irptryux">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt>
+        <emu-t>!==</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-RelationalExpression">RelationalExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="BitwiseANDExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseANDExpression">BitwiseANDExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="qq3twiws">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseANDExpression">BitwiseANDExpression</a></emu-nt>
+        <emu-t>&amp;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-EqualityExpression">EqualityExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="BitwiseXORExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseXORExpression">BitwiseXORExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="tgmxlg5x">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseXORExpression">BitwiseXORExpression</a></emu-nt>
+        <emu-t>^</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseANDExpression">BitwiseANDExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="BitwiseORExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseORExpression">BitwiseORExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="aw36khwc">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseORExpression">BitwiseORExpression</a></emu-nt>
+        <emu-t>|</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseXORExpression">BitwiseXORExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="LogicalANDExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-LogicalANDExpression">LogicalANDExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="iybiqszh">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LogicalANDExpression">LogicalANDExpression</a></emu-nt>
+        <emu-t>&amp;&amp;</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseORExpression">BitwiseORExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="LogicalORExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-LogicalORExpression">LogicalORExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="tku92t5q">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LogicalORExpression">LogicalORExpression</a></emu-nt>
+        <emu-t>||</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LogicalANDExpression">LogicalANDExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="CoalesceExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-CoalesceExpression">CoalesceExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="3eoigfmu">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-CoalesceExpressionHead">CoalesceExpressionHead</a></emu-nt>
+        <emu-t>??</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-BitwiseORExpression">BitwiseORExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="ConditionalExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-ConditionalExpression">ConditionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="d4vlxget">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ShortCircuitExpression">ShortCircuitExpression</a></emu-nt>
+        <emu-t>?</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+        <emu-t>:</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="AssignmentExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="uglis9ea">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-YieldExpression">YieldExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="k987eemp">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-ArrowFunction">ArrowFunction</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="a3kew9kn">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AsyncArrowFunction">AsyncArrowFunction</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="ijpo4eaq">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="xzqhr---">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentOperator">AssignmentOperator</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="devkzibl">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>&amp;&amp;=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="dt1frwiy">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>||=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="dbifpqxa">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>??=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+<emu-production name="Expression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="cwoazx1t">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
+        <emu-t>,</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+  <emu-alg><ol><li>Return <emu-const>invalid</emu-const>.</li></ol></emu-alg>
 </emu-clause>
 
-<emu-clause id="sec-is-accepted" type="abstract operation" aoid="IsAccepted">
-  <h1><span class="secnum">2</span> IsAccepted ( <var>proposal</var> )</h1>
-  <p>The abstract operation IsAccepted takes argument <var>proposal</var> (an <emu-xref href="#sec-ecmascript-language-types"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types">ECMAScript language value</a></emu-xref>) and returns a Boolean. Tells you if the proposal was accepted It performs the following steps when called:</p>
-  <emu-alg><ol><li>If <var>proposal</var> <emu-xref href="#sec-ecmascript-language-types-string-type"><a href="https://tc39.es/ecma262/#sec-ecmascript-language-types-string-type">is not a String</a></emu-xref>, or is not accepted, return <emu-val>false</emu-val>.</li><li>Return <emu-val>true</emu-val>.</li></ol></emu-alg>
+  <emu-clause id="sec-assignment-operators-static-semantics-early-errors">
+    <h1><span class="secnum">1.2</span> Static Semantics: Early Errors</h1>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="ijpo4eaq">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <p>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is either an <emu-nt><a href="https://tc39.es/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt> or an <emu-nt><a href="https://tc39.es/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>, the following Early Error rules are applied:</p>
+    <ul>
+      <li>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> <emu-xref href="#must-cover"><a href="https://tc39.es/ecma262/#must-cover">must cover</a></emu-xref> an <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentPattern">AssignmentPattern</a></emu-nt>.
+      </li>
+    </ul>
+    <p>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is neither an <emu-nt><a href="https://tc39.es/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt> nor an <emu-nt><a href="https://tc39.es/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>, the following Early Error rule is applied:</p>
+    <ul>
+      <li>
+        It is a Syntax Error if <emu-xref aoid="AssignmentTargetType" id="_ref_2"><a href="#sec-static-semantics-assignmenttargettype">AssignmentTargetType</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is not <emu-const>simple</emu-const> <ins>or <emu-const>optional</emu-const></ins>.
+      </li>
+    </ul>
+    <emu-grammar><emu-production name="AssignmentExpression">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="xzqhr---">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentOperator">AssignmentOperator</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="devkzibl">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>&amp;&amp;=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="dt1frwiy">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>||=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="dbifpqxa">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>??=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <ul>
+      <li>
+        It is a Syntax Error if <emu-xref aoid="AssignmentTargetType" id="_ref_3"><a href="#sec-static-semantics-assignmenttargettype">AssignmentTargetType</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is not <emu-const>simple</emu-const> <ins>or <emu-const>optional</emu-const></ins>.
+      </li>
+    </ul>
+  </emu-clause>
+
+  <emu-clause id="sec-assignment-operators-runtime-semantics-evaluation" type="sdo">
+    <h1><span class="secnum">1.3</span> Runtime Semantics: Evaluation</h1>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="ijpo4eaq">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <emu-alg><ol><li>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is neither an <emu-nt><a href="https://tc39.es/ecma262/#prod-ObjectLiteral">ObjectLiteral</a></emu-nt> nor an <emu-nt><a href="https://tc39.es/ecma262/#prod-ArrayLiteral">ArrayLiteral</a></emu-nt>, then<ol><li>Let <var>lref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val> and <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is not a <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt>, return <emu-val>undefined</emu-val>.</ins></li><li>If <emu-xref aoid="IsAnonymousFunctionDefinition"><a href="https://tc39.es/ecma262/#sec-isanonymousfunctiondefinition">IsAnonymousFunctionDefinition</a></emu-xref>(<emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>) and <emu-xref aoid="IsIdentifierRef"><a href="https://tc39.es/ecma262/#sec-static-semantics-isidentifierref">IsIdentifierRef</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> are both <emu-val>true</emu-val>, then<ol><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="NamedEvaluation"><a href="https://tc39.es/ecma262/#sec-runtime-semantics-namedevaluation">NamedEvaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> with argument <var>lref</var>.<var class="field">[[ReferencedName]]</var>.</li></ol></li><li>Else,<ol><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li></ol></li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val>, throw a <emu-val>TypeError</emu-val> exception.</ins></li><li id="step-assignmentexpression-evaluation-simple-putvalue">Perform ?&nbsp;<emu-xref aoid="PutValue"><a href="https://tc39.es/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>rval</var>).</li><li>Return <var>rval</var>.</li></ol></li><li>Let <var>assignmentPattern</var> be the <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentPattern">AssignmentPattern</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li><li>Perform ?&nbsp;<emu-xref aoid="DestructuringAssignmentEvaluation"><a href="https://tc39.es/ecma262/#sec-runtime-semantics-destructuringassignmentevaluation">DestructuringAssignmentEvaluation</a></emu-xref> of <var>assignmentPattern</var> with argument <var>rval</var>.</li><li>Return <var>rval</var>.</li></ol></emu-alg>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="xzqhr---">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentOperator">AssignmentOperator</a></emu-nt>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <emu-alg><ol><li>Let <var>lref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val>, then</ins><ol><li><ins>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is a <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt>, throw a <emu-val>TypeError</emu-val> exception.</ins></li><li><ins>Return <emu-val>undefined</emu-val>.</ins></li></ol></li><li id="step-assignmentexpression-evaluation-compound-getvalue">Let <var>lval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>lref</var>).</li><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li><li>Let <var>assignmentOpText</var> be the <emu-xref href="#sec-algorithm-conventions-syntax-directed-operations"><a href="https://tc39.es/ecma262/#sec-algorithm-conventions-syntax-directed-operations">source text matched by</a></emu-xref> <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentOperator">AssignmentOperator</a></emu-nt>.</li><li>Let <var>opText</var> be the sequence of Unicode code points associated with <var>assignmentOpText</var> in the following table:
+        <figure>
+          <!-- emu-format ignore -->
+          <table class="lightweight-table">
+            <tbody><tr><th> <var>assignmentOpText</var> </th><th> <var>opText</var>       </th></tr>
+            <tr><td> <code>**=</code>              </td><td> <code>**</code>           </td></tr>
+            <tr><td> <code>*=</code>               </td><td> <code>*</code>            </td></tr>
+            <tr><td> <code>/=</code>               </td><td> <code>/</code>            </td></tr>
+            <tr><td> <code>%=</code>               </td><td> <code>%</code>            </td></tr>
+            <tr><td> <code>+=</code>               </td><td> <code>+</code>            </td></tr>
+            <tr><td> <code>-=</code>               </td><td> <code>-</code>            </td></tr>
+            <tr><td> <code>&lt;&lt;=</code>        </td><td> <code>&lt;&lt;</code>     </td></tr>
+            <tr><td> <code>&gt;&gt;=</code>        </td><td> <code>&gt;&gt;</code>     </td></tr>
+            <tr><td> <code>&gt;&gt;&gt;=</code>    </td><td> <code>&gt;&gt;&gt;</code> </td></tr>
+            <tr><td> <code>&amp;=</code>           </td><td> <code>&amp;</code>        </td></tr>
+            <tr><td> <code>^=</code>               </td><td> <code>^</code>            </td></tr>
+            <tr><td> <code>|=</code>               </td><td> <code>|</code>            </td></tr>
+          </tbody></table>
+        </figure></li><li>Let <var>r</var> be ?&nbsp;<emu-xref aoid="ApplyStringOrNumericBinaryOperator"><a href="https://tc39.es/ecma262/#sec-applystringornumericbinaryoperator">ApplyStringOrNumericBinaryOperator</a></emu-xref>(<var>lval</var>, <var>opText</var>, <var>rval</var>).</li><li id="step-assignmentexpression-evaluation-compound-putvalue">Perform ?&nbsp;<emu-xref aoid="PutValue"><a href="https://tc39.es/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>r</var>).</li><li>Return <var>r</var>.</li></ol></emu-alg>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="devkzibl">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>&amp;&amp;=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <emu-alg><ol><li>Let <var>lref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val>, then</ins><ol><li><ins>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is a <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt>, throw a <emu-val>TypeError</emu-val> exception.</ins></li><li><ins>Return <emu-val>undefined</emu-val>.</ins></li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-and-getvalue">Let <var>lval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>lref</var>).</li><li>Let <var>lbool</var> be <emu-xref aoid="ToBoolean"><a href="https://tc39.es/ecma262/#sec-toboolean">ToBoolean</a></emu-xref>(<var>lval</var>).</li><li>If <var>lbool</var> is <emu-val>false</emu-val>, return <var>lval</var>.</li><li>If <emu-xref aoid="IsAnonymousFunctionDefinition"><a href="https://tc39.es/ecma262/#sec-isanonymousfunctiondefinition">IsAnonymousFunctionDefinition</a></emu-xref>(<emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>) is <emu-val>true</emu-val> and <emu-xref aoid="IsIdentifierRef"><a href="https://tc39.es/ecma262/#sec-static-semantics-isidentifierref">IsIdentifierRef</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is <emu-val>true</emu-val>, then<ol><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="NamedEvaluation"><a href="https://tc39.es/ecma262/#sec-runtime-semantics-namedevaluation">NamedEvaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> with argument <var>lref</var>.<var class="field">[[ReferencedName]]</var>.</li></ol></li><li>Else,<ol><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-and-putvalue">Perform ?&nbsp;<emu-xref aoid="PutValue"><a href="https://tc39.es/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>rval</var>).</li><li>Return <var>rval</var>.</li></ol></emu-alg>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dt1frwiy">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>||=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <emu-alg><ol><li>Let <var>lref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val>, then</ins><ol><li><ins>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is a <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt>, throw a <emu-val>TypeError</emu-val> exception.</ins></li><li><ins>Return <emu-val>undefined</emu-val>.</ins></li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-or-getvalue">Let <var>lval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>lref</var>).</li><li>Let <var>lbool</var> be <emu-xref aoid="ToBoolean"><a href="https://tc39.es/ecma262/#sec-toboolean">ToBoolean</a></emu-xref>(<var>lval</var>).</li><li>If <var>lbool</var> is <emu-val>true</emu-val>, return <var>lval</var>.</li><li>If <emu-xref aoid="IsAnonymousFunctionDefinition"><a href="https://tc39.es/ecma262/#sec-isanonymousfunctiondefinition">IsAnonymousFunctionDefinition</a></emu-xref>(<emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>) is <emu-val>true</emu-val> and <emu-xref aoid="IsIdentifierRef"><a href="https://tc39.es/ecma262/#sec-static-semantics-isidentifierref">IsIdentifierRef</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is <emu-val>true</emu-val>, then<ol><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="NamedEvaluation"><a href="https://tc39.es/ecma262/#sec-runtime-semantics-namedevaluation">NamedEvaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> with argument <var>lref</var>.<var class="field">[[ReferencedName]]</var>.</li></ol></li><li>Else,<ol><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-or-putvalue">Perform ?&nbsp;<emu-xref aoid="PutValue"><a href="https://tc39.es/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>rval</var>).</li><li>Return <var>rval</var>.</li></ol></emu-alg>
+    <emu-grammar><emu-production name="AssignmentExpression" collapsed="">
+    <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dbifpqxa">
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>
+        <emu-t>??=</emu-t>
+        <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>
+    </emu-rhs>
+</emu-production>
+</emu-grammar>
+    <emu-alg><ol><li>Let <var>lref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt>.</li><li><ins>If <var>lref</var> is <emu-val>undefined</emu-val>, then</ins><ol><li><ins>If <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is a <emu-nt><a href="https://tc39.es/ecma262/#prod-ParenthesizedExpression">ParenthesizedExpression</a></emu-nt>, throw a <emu-val>TypeError</emu-val> exception.</ins></li><li><ins>Return <emu-val>undefined</emu-val>.</ins></li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-nullish-getvalue">Let <var>lval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>lref</var>).</li><li>If <var>lval</var> is neither <emu-val>undefined</emu-val> nor <emu-val>null</emu-val>, return <var>lval</var>.</li><li>If <emu-xref aoid="IsAnonymousFunctionDefinition"><a href="https://tc39.es/ecma262/#sec-isanonymousfunctiondefinition">IsAnonymousFunctionDefinition</a></emu-xref>(<emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>) is <emu-val>true</emu-val> and <emu-xref aoid="IsIdentifierRef"><a href="https://tc39.es/ecma262/#sec-static-semantics-isidentifierref">IsIdentifierRef</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-LeftHandSideExpression">LeftHandSideExpression</a></emu-nt> is <emu-val>true</emu-val>, then<ol><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="NamedEvaluation"><a href="https://tc39.es/ecma262/#sec-runtime-semantics-namedevaluation">NamedEvaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt> with argument <var>lref</var>.<var class="field">[[ReferencedName]]</var>.</li></ol></li><li>Else,<ol><li>Let <var>rref</var> be ?&nbsp;<emu-xref aoid="Evaluation"><a href="https://tc39.es/ecma262/#sec-evaluation">Evaluation</a></emu-xref> of <emu-nt><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a></emu-nt>.</li><li>Let <var>rval</var> be ?&nbsp;<emu-xref aoid="GetValue"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>rref</var>).</li></ol></li><li id="step-assignmentexpression-evaluation-lgcl-nullish-putvalue">Perform ?&nbsp;<emu-xref aoid="PutValue"><a href="https://tc39.es/ecma262/#sec-putvalue">PutValue</a></emu-xref>(<var>lref</var>, <var>rval</var>).</li><li>Return <var>rval</var>.</li></ol></emu-alg>
+  </emu-clause>
 </emu-clause><emu-annex id="sec-copyright-and-software-license">
       <h1><span class="secnum">A</span> Copyright &amp; Software License</h1>
       
@@ -2727,5 +3311,4 @@ li.menu-search-result-term:before {
 
 <p>THIS SOFTWARE IS PROVIDED BY THE ECMA INTERNATIONAL "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ECMA INTERNATIONAL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
-    </emu-annex>
-</div></body>
+    </emu-annex></div></body>
