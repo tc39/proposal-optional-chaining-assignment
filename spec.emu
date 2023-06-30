@@ -9,31 +9,333 @@ stage: 0
 contributors: Nicolò Ribaudo
 </pre>
 
-<emu-clause id="sec-demo-clause">
-  <h1>This is an emu-clause</h1>
-  <p>This is an algorithm:</p>
+<emu-clause id="sec-assignment-operators">
+  <h1>Assignment Operators</h1>
+
+  <emu-clause id="sec-static-semantics-assignmenttargettype" type="sdo">
+  <h1>
+    Static Semantics: AssignmentTargetType (
+    ): ~simple~, ~optional~, or ~invalid~
+  </h1>
+  <dl class="header">
+  </dl>
+  <emu-grammar>IdentifierReference : Identifier</emu-grammar>
   <emu-alg>
-    1. Let _proposal_ be *undefined*.
-    1. If IsAccepted(_proposal_) is *true*, then
-      1. Let _stage_ be *0*<sub>ℤ</sub>.
-    1. Else,
-      1. Let _stage_ be *-1*<sub>ℤ</sub>.
-    1. Return ? ToString(_stage_).
+    1. If this |IdentifierReference| is contained in strict mode code and StringValue of |Identifier| is either *"eval"* or *"arguments"*, return ~invalid~.
+    1. Return ~simple~.
+  </emu-alg>
+  <emu-grammar>
+    IdentifierReference :
+      `yield`
+      `await`
+
+    CallExpression :
+      CallExpression `[` Expression `]`
+      CallExpression `.` IdentifierName
+      CallExpression `.` PrivateIdentifier
+
+    MemberExpression :
+      MemberExpression `[` Expression `]`
+      MemberExpression `.` IdentifierName
+      SuperProperty
+      MemberExpression `.` PrivateIdentifier
+  </emu-grammar>
+  <emu-alg>
+    1. Return ~simple~.
+  </emu-alg>
+  <emu-grammar><ins>
+    OptionalExpression :
+      MemberExpression OptionalChain
+      CallExpression OptionalChain
+      OptionalExpression OptionalChain
+  </ins></emu-grammar>
+  <emu-alg>
+    1. <ins>Return AssignmentTargetType of |OptionalChain|.</ins>
+  </emu-alg>
+  <emu-grammar><ins>
+    OptionalChain :
+      `?.` `[` Expression `]`
+      `?.` IdentifierName
+      `?.` PrivateIdentifier
+      OptionalChain `[` Expression `]`
+      OptionalChain `.` IdentifierName
+      OptionalChain `.` PrivateIdentifier
+  </ins></emu-grammar>
+  <emu-alg>
+    1. <ins>Return ~optional~.</ins>
+  </emu-alg>
+  <emu-grammar>
+    PrimaryExpression :
+      CoverParenthesizedExpressionAndArrowParameterList
+  </emu-grammar>
+  <emu-alg>
+    1. Let _expr_ be the |ParenthesizedExpression| that is covered by |CoverParenthesizedExpressionAndArrowParameterList|.
+    1. Return AssignmentTargetType of _expr_.
+  </emu-alg>
+  <emu-grammar>
+    PrimaryExpression :
+      `this`
+      Literal
+      ArrayLiteral
+      ObjectLiteral
+      FunctionExpression
+      ClassExpression
+      GeneratorExpression
+      AsyncFunctionExpression
+      AsyncGeneratorExpression
+      RegularExpressionLiteral
+      TemplateLiteral
+
+    CallExpression :
+      CoverCallExpressionAndAsyncArrowHead
+      SuperCall
+      ImportCall
+      CallExpression Arguments
+      CallExpression TemplateLiteral
+
+    <ins>
+    OptionalChain :
+      `?.` Arguments
+      `?.` TemplateLiteral
+      OptionalChain Arguments
+      OptionalChain TemplateLiteral
+    </ins>
+
+    NewExpression :
+      `new` NewExpression
+
+    MemberExpression :
+      MemberExpression TemplateLiteral
+      `new` MemberExpression Arguments
+
+    NewTarget :
+      `new` `.` `target`
+
+    ImportMeta :
+      `import` `.` `meta`
+
+    <del>
+    LeftHandSideExpression :
+      OptionalExpression
+    </del>
+
+    UpdateExpression :
+      LeftHandSideExpression `++`
+      LeftHandSideExpression `--`
+      `++` UnaryExpression
+      `--` UnaryExpression
+
+    UnaryExpression :
+      `delete` UnaryExpression
+      `void` UnaryExpression
+      `typeof` UnaryExpression
+      `+` UnaryExpression
+      `-` UnaryExpression
+      `~` UnaryExpression
+      `!` UnaryExpression
+      AwaitExpression
+
+    ExponentiationExpression :
+      UpdateExpression `**` ExponentiationExpression
+
+    MultiplicativeExpression :
+      MultiplicativeExpression MultiplicativeOperator ExponentiationExpression
+
+    AdditiveExpression :
+      AdditiveExpression `+` MultiplicativeExpression
+      AdditiveExpression `-` MultiplicativeExpression
+
+    ShiftExpression :
+      ShiftExpression `&lt;&lt;` AdditiveExpression
+      ShiftExpression `&gt;&gt;` AdditiveExpression
+      ShiftExpression `&gt;&gt;&gt;` AdditiveExpression
+
+    RelationalExpression :
+      RelationalExpression `&lt;` ShiftExpression
+      RelationalExpression `&gt;` ShiftExpression
+      RelationalExpression `&lt;=` ShiftExpression
+      RelationalExpression `&gt;=` ShiftExpression
+      RelationalExpression `instanceof` ShiftExpression
+      RelationalExpression `in` ShiftExpression
+      PrivateIdentifier `in` ShiftExpression
+
+    EqualityExpression :
+      EqualityExpression `==` RelationalExpression
+      EqualityExpression `!=` RelationalExpression
+      EqualityExpression `===` RelationalExpression
+      EqualityExpression `!==` RelationalExpression
+
+    BitwiseANDExpression :
+      BitwiseANDExpression `&amp;` EqualityExpression
+
+    BitwiseXORExpression :
+      BitwiseXORExpression `^` BitwiseANDExpression
+
+    BitwiseORExpression :
+      BitwiseORExpression `|` BitwiseXORExpression
+
+    LogicalANDExpression :
+      LogicalANDExpression `&amp;&amp;` BitwiseORExpression
+
+    LogicalORExpression :
+      LogicalORExpression `||` LogicalANDExpression
+
+    CoalesceExpression :
+      CoalesceExpressionHead `??` BitwiseORExpression
+
+    ConditionalExpression :
+      ShortCircuitExpression `?` AssignmentExpression `:` AssignmentExpression
+
+    AssignmentExpression :
+      YieldExpression
+      ArrowFunction
+      AsyncArrowFunction
+      LeftHandSideExpression `=` AssignmentExpression
+      LeftHandSideExpression AssignmentOperator AssignmentExpression
+      LeftHandSideExpression `&amp;&amp;=` AssignmentExpression
+      LeftHandSideExpression `||=` AssignmentExpression
+      LeftHandSideExpression `??=` AssignmentExpression
+
+    Expression :
+      Expression `,` AssignmentExpression
+  </emu-grammar>
+  <emu-alg>
+    1. Return ~invalid~.
   </emu-alg>
 </emu-clause>
 
-<emu-clause id="sec-is-accepted" type="abstract operation">
-  <h1>
-      IsAccepted (
-        _proposal_: an ECMAScript language value
-      ): a Boolean
-  </h1>
-  <dl class="header">
-    <dt>description</dt>
-    <dd>Tells you if the proposal was accepted</dd>
-  </dl>
-  <emu-alg>
-    1. If _proposal_ is not a String, or is not accepted, return *false*.
-    1. Return *true*.
-  </emu-alg>
+  <emu-clause id="sec-assignment-operators-static-semantics-early-errors">
+    <h1>Static Semantics: Early Errors</h1>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression `=` AssignmentExpression</emu-grammar>
+    <p>If |LeftHandSideExpression| is either an |ObjectLiteral| or an |ArrayLiteral|, the following Early Error rules are applied:</p>
+    <ul>
+      <li>
+        |LeftHandSideExpression| must cover an |AssignmentPattern|.
+      </li>
+    </ul>
+    <p>If |LeftHandSideExpression| is neither an |ObjectLiteral| nor an |ArrayLiteral|, the following Early Error rule is applied:</p>
+    <ul>
+      <li>
+        It is a Syntax Error if AssignmentTargetType of |LeftHandSideExpression| is not ~simple~ <ins>or ~optional~</ins>.
+      </li>
+    </ul>
+    <emu-grammar>
+      AssignmentExpression :
+        LeftHandSideExpression AssignmentOperator AssignmentExpression
+        LeftHandSideExpression `&amp;&amp;=` AssignmentExpression
+        LeftHandSideExpression `||=` AssignmentExpression
+        LeftHandSideExpression `??=` AssignmentExpression
+    </emu-grammar>
+    <ul>
+      <li>
+        It is a Syntax Error if AssignmentTargetType of |LeftHandSideExpression| is not ~simple~ <ins>or ~optional~</ins>.
+      </li>
+    </ul>
+  </emu-clause>
+
+  <emu-clause id="sec-assignment-operators-runtime-semantics-evaluation" type="sdo">
+    <h1>Runtime Semantics: Evaluation</h1>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression `=` AssignmentExpression</emu-grammar>
+    <emu-alg>
+      1. If |LeftHandSideExpression| is neither an |ObjectLiteral| nor an |ArrayLiteral|, then
+        1. Let _lref_ be ? Evaluation of |LeftHandSideExpression|.
+        1. <ins>If _lref_ is *undefined* and |LeftHandSideExpression| is not a |ParenthesizedExpression|, return *undefined*.</ins>
+        1. If IsAnonymousFunctionDefinition(|AssignmentExpression|) and IsIdentifierRef of |LeftHandSideExpression| are both *true*, then
+          1. Let _rval_ be ? NamedEvaluation of |AssignmentExpression| with argument _lref_.[[ReferencedName]].
+        1. Else,
+          1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+          1. Let _rval_ be ? GetValue(_rref_).
+        1. <ins>If _lref_ is *undefined*, throw a *TypeError* exception.</ins>
+        1. [id="step-assignmentexpression-evaluation-simple-putvalue"] Perform ? PutValue(_lref_, _rval_).
+        1. Return _rval_.
+      1. Let _assignmentPattern_ be the |AssignmentPattern| that is covered by |LeftHandSideExpression|.
+      1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+      1. Let _rval_ be ? GetValue(_rref_).
+      1. Perform ? DestructuringAssignmentEvaluation of _assignmentPattern_ with argument _rval_.
+      1. Return _rval_.
+    </emu-alg>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression AssignmentOperator AssignmentExpression</emu-grammar>
+    <emu-alg>
+      1. Let _lref_ be ? Evaluation of |LeftHandSideExpression|.
+      1. <ins>If _lref_ is *undefined*, then</ins>
+        1. <ins>If |LeftHandSideExpression| is a |ParenthesizedExpression|, throw a *TypeError* exception.</ins>
+        1. <ins>Return *undefined*.</ins>
+      1. [id="step-assignmentexpression-evaluation-compound-getvalue"] Let _lval_ be ? GetValue(_lref_).
+      1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+      1. Let _rval_ be ? GetValue(_rref_).
+      1. Let _assignmentOpText_ be the source text matched by |AssignmentOperator|.
+      1. Let _opText_ be the sequence of Unicode code points associated with _assignmentOpText_ in the following table:
+        <figure>
+          <!-- emu-format ignore -->
+          <table class="lightweight-table">
+            <tr><th> _assignmentOpText_ </th><th> _opText_       </th></tr>
+            <tr><td> `**=`              </td><td> `**`           </td></tr>
+            <tr><td> `*=`               </td><td> `*`            </td></tr>
+            <tr><td> `/=`               </td><td> `/`            </td></tr>
+            <tr><td> `%=`               </td><td> `%`            </td></tr>
+            <tr><td> `+=`               </td><td> `+`            </td></tr>
+            <tr><td> `-=`               </td><td> `-`            </td></tr>
+            <tr><td> `&lt;&lt;=`        </td><td> `&lt;&lt;`     </td></tr>
+            <tr><td> `&gt;&gt;=`        </td><td> `&gt;&gt;`     </td></tr>
+            <tr><td> `&gt;&gt;&gt;=`    </td><td> `&gt;&gt;&gt;` </td></tr>
+            <tr><td> `&amp;=`           </td><td> `&amp;`        </td></tr>
+            <tr><td> `^=`               </td><td> `^`            </td></tr>
+            <tr><td> `|=`               </td><td> `|`            </td></tr>
+          </table>
+        </figure>
+      1. Let _r_ be ? ApplyStringOrNumericBinaryOperator(_lval_, _opText_, _rval_).
+      1. [id="step-assignmentexpression-evaluation-compound-putvalue"] Perform ? PutValue(_lref_, _r_).
+      1. Return _r_.
+    </emu-alg>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression `&amp;&amp;=` AssignmentExpression</emu-grammar>
+    <emu-alg>
+      1. Let _lref_ be ? Evaluation of |LeftHandSideExpression|.
+      1. <ins>If _lref_ is *undefined*, then</ins>
+        1. <ins>If |LeftHandSideExpression| is a |ParenthesizedExpression|, throw a *TypeError* exception.</ins>
+        1. <ins>Return *undefined*.</ins>
+      1. [id="step-assignmentexpression-evaluation-lgcl-and-getvalue"] Let _lval_ be ? GetValue(_lref_).
+      1. Let _lbool_ be ToBoolean(_lval_).
+      1. If _lbool_ is *false*, return _lval_.
+      1. If IsAnonymousFunctionDefinition(|AssignmentExpression|) is *true* and IsIdentifierRef of |LeftHandSideExpression| is *true*, then
+        1. Let _rval_ be ? NamedEvaluation of |AssignmentExpression| with argument _lref_.[[ReferencedName]].
+      1. Else,
+        1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+        1. Let _rval_ be ? GetValue(_rref_).
+      1. [id="step-assignmentexpression-evaluation-lgcl-and-putvalue"] Perform ? PutValue(_lref_, _rval_).
+      1. Return _rval_.
+    </emu-alg>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression `||=` AssignmentExpression</emu-grammar>
+    <emu-alg>
+      1. Let _lref_ be ? Evaluation of |LeftHandSideExpression|.
+      1. <ins>If _lref_ is *undefined*, then</ins>
+        1. <ins>If |LeftHandSideExpression| is a |ParenthesizedExpression|, throw a *TypeError* exception.</ins>
+        1. <ins>Return *undefined*.</ins>
+      1. [id="step-assignmentexpression-evaluation-lgcl-or-getvalue"] Let _lval_ be ? GetValue(_lref_).
+      1. Let _lbool_ be ToBoolean(_lval_).
+      1. If _lbool_ is *true*, return _lval_.
+      1. If IsAnonymousFunctionDefinition(|AssignmentExpression|) is *true* and IsIdentifierRef of |LeftHandSideExpression| is *true*, then
+        1. Let _rval_ be ? NamedEvaluation of |AssignmentExpression| with argument _lref_.[[ReferencedName]].
+      1. Else,
+        1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+        1. Let _rval_ be ? GetValue(_rref_).
+      1. [id="step-assignmentexpression-evaluation-lgcl-or-putvalue"] Perform ? PutValue(_lref_, _rval_).
+      1. Return _rval_.
+    </emu-alg>
+    <emu-grammar>AssignmentExpression : LeftHandSideExpression `??=` AssignmentExpression</emu-grammar>
+    <emu-alg>
+      1. Let _lref_ be ? Evaluation of |LeftHandSideExpression|.
+      1. <ins>If _lref_ is *undefined*, then</ins>
+        1. <ins>If |LeftHandSideExpression| is a |ParenthesizedExpression|, throw a *TypeError* exception.</ins>
+        1. <ins>Return *undefined*.</ins>
+      1. [id="step-assignmentexpression-evaluation-lgcl-nullish-getvalue"] Let _lval_ be ? GetValue(_lref_).
+      1. If _lval_ is neither *undefined* nor *null*, return _lval_.
+      1. If IsAnonymousFunctionDefinition(|AssignmentExpression|) is *true* and IsIdentifierRef of |LeftHandSideExpression| is *true*, then
+        1. Let _rval_ be ? NamedEvaluation of |AssignmentExpression| with argument _lref_.[[ReferencedName]].
+      1. Else,
+        1. Let _rref_ be ? Evaluation of |AssignmentExpression|.
+        1. Let _rval_ be ? GetValue(_rref_).
+      1. [id="step-assignmentexpression-evaluation-lgcl-nullish-putvalue"] Perform ? PutValue(_lref_, _rval_).
+      1. Return _rval_.
+    </emu-alg>
+  </emu-clause>
 </emu-clause>
