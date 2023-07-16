@@ -5,7 +5,7 @@ Proposal to add support for optional chaining on the left of assignment operator
 ## Status
 
 - Champion: Nicolò Ribaudo
-- Stage: 0
+- Stage: 1
 - Slides:
   - [July 2023](https://docs.google.com/presentation/d/1KL9MRyxprgXDEsxT8Ddrdro074L3fQm88zXHsWL-Dwk)
 
