@@ -5,7 +5,7 @@
 <script src="./spec.js"></script>
 <pre class="metadata">
 title: Optional Chaining Assignment
-stage: 0
+stage: 1
 contributors: Nicolò Ribaudo
 </pre>
 
