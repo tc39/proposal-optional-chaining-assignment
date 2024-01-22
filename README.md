@@ -39,7 +39,7 @@ This proposal introduces the following syntax:
 
 ## Implementations
 
-- [ ] Babel
+- [X] Babel ([7.23.0](https://babeljs.io/blog/2023/09/25/7.23.0#optional-chaining-assignment-15751))
 - [ ] TypeScript ([partially supported](https://www.typescriptlang.org/play?#code/DYUwLgBAhgXBB2BXYwIB8IG8IA85IFsAjEAJwgF8BuAKBqgH4A6HCAXggEZbGWIBqDgGZaQA) in the transform thanks to error recovery)
 - [ ] V8
 - [ ] JSC
